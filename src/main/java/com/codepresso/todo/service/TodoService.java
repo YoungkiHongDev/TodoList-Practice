@@ -1,19 +1,33 @@
 package com.codepresso.todo.service;
 
+import com.codepresso.todo.vo.Todo;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TodoService {
 
-    public String getTodoList() {
-        return null;
+    private List<Todo> todoList;
+
+    //멤버변수 todoList에 의존성 주입
+    public TodoService(List<Todo> todoList) {
+        this.todoList = todoList;
     }
 
-    public String addTodo() {
-        return null;
+    //todoList 정보 반환
+    public List<Todo> getTodoList() {
+        return todoList;
     }
 
-    public String deleteTodo() {
-        return null;
+    //todoList 항목 추가
+    public void addTodo(Todo todo) {
+        todo.setId(todoList.size()); //todoList 항목 아이디 세팅
+        todoList.add(todo);
+    }
+
+    //todoList 항목 삭제
+    public void deleteTodo(int index) {
+        todoList.remove(index);
     }
 }
